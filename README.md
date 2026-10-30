@@ -8,6 +8,13 @@
 
 DataType de chave de storage para aplicações Elavora API.
 
+```php
+use Elavora\Api\DataTypes\Storage\StorageKey;
+
+$chave = StorageKey::from('documents\\report.pdf');
+$normalizado = $chave->value(); // "documents/report.pdf"
+```
+
 Guia de uso, com a API pública e exemplos: [docs/USO.md](docs/USO.md).
 
 ## Instalação
@@ -15,6 +22,9 @@ Guia de uso, com a API pública e exemplos: [docs/USO.md](docs/USO.md).
 ```bash
 composer require elavora/api-datatype-storage-key
 ```
+
+Requisitos: PHP 8.3 ou superior e `elavora/api-datatype-file-path` `^1.0` (que traz o `elavora/api-datatype-core`
+`^2.0`, e este, o `elavora/api-framework` `^2.0`).
 
 ## Desenvolvimento e testes
 
@@ -49,6 +59,16 @@ estão em [Desenvolvimento e testes](docs/DESENVOLVIMENTO.md).
 5. Confira o comentário do pipeline de qualidade no PR. Ele não bloqueia o merge, mas quem revisa olha o resultado.
 
 ## Versões
+
+Versão `1.0.0`: atualiza o pacote para o `elavora/api-datatype-file-path` `^1.0` e exige PHP 8.3 ou superior (antes:
+PHP 8.1 e file-path `^0.1`). O `file-path` `^0.1` usa o core `^0.1`, que não funciona mais com o framework atual, por
+isso a restrição antiga deixa de ser aceita. A regra de validação e a normalização de `StorageKey` não mudam, mas há
+duas quebras de comportamento herdadas do core 2.0:
+
+- o construtor deixou de ser público: a criação é só por `StorageKey::from(...)`;
+- entrada inválida lança `InvalidArgumentException` com a mensagem `Valor invalido para <classe>.`.
+
+Detalhes e exemplos em [docs/USO.md](docs/USO.md#quebras-da-versão-100).
 
 Cada PR integrado na `main` gera uma versão automaticamente, conforme as labels do PR: sem a label `release` sai uma
 beta (`1.1.0-beta.1`), com ela sai a estável (`1.1.0`). As tags novas não têm o prefixo `v`, e as notas de cada
