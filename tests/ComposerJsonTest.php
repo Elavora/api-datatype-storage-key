@@ -33,7 +33,7 @@ final class ComposerJsonTest extends TestCase
 
     public function testRequiresDatatypeFilePath1(): void
     {
-        self::assertSame('^1.0', $this->composer['require']['elavora/api-datatype-file-path'] ?? null);
+        self::assertSame('^2.0', $this->composer['require']['elavora/api-datatype-file-path'] ?? null);
     }
 
     public function testDoesNotRequireDatatypeCoreDirectly(): void
@@ -43,7 +43,7 @@ final class ComposerJsonTest extends TestCase
 
     public function testBranchAliasIs10Dev(): void
     {
-        self::assertSame('1.0-dev', $this->composer['extra']['branch-alias']['dev-main'] ?? null);
+        self::assertSame('2.0-dev', $this->composer['extra']['branch-alias']['dev-main'] ?? null);
     }
 
     public function testAutoloadIsUnchanged(): void

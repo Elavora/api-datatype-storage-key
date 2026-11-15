@@ -19,7 +19,7 @@ composer require elavora/api-datatype-storage-key
 ```php
 use Elavora\Api\DataTypes\Storage\StorageKey;
 
-$chave = StorageKey::from('documents\\report.pdf');
+$chave = new StorageKey('documents\\report.pdf');
 $normalizado = $chave->value(); // "documents/report.pdf"
 ```
 
@@ -34,7 +34,7 @@ $normalizado = $chave->value(); // "documents/report.pdf"
 
 | Metodo | Retorno | O que faz |
 | --- | --- | --- |
-| `StorageKey::from(mixed $value)` | `StorageKey` | valida e cria a instancia, ja com o valor normalizado |
+| `new StorageKey(mixed $value)` | `StorageKey` | valida e cria a instancia, ja com o valor normalizado |
 | `StorageKey::isValid(mixed $value)` | `bool` | diz se o valor e uma chave valida, sem lancar excecao |
 | `$chave->value()` | `string` | o valor normalizado |
 | `$chave->jsonSerialize()` | `string` | o mesmo valor, para `json_encode` |
@@ -65,11 +65,11 @@ Valor que nao e string (por exemplo `123`, `null` ou um array) e invalido.
 
 ### Erros
 
-`StorageKey::from(...)` com valor invalido lanca `InvalidArgumentException` (a do PHP, `\InvalidArgumentException`),
+`new StorageKey(...)` com valor invalido lanca `InvalidArgumentException` (a do PHP, `\InvalidArgumentException`),
 com a mensagem `Valor invalido para Elavora\Api\DataTypes\Storage\StorageKey.`. `StorageKey::isValid(...)` nunca lanca.
 
 ```php
-StorageKey::from('/documents/report.pdf');
+new StorageKey('/documents/report.pdf');
 // InvalidArgumentException: Valor invalido para Elavora\Api\DataTypes\Storage\StorageKey.
 ```
 
@@ -77,11 +77,11 @@ StorageKey::from('/documents/report.pdf');
 
 Estas duas mudancas vem do `elavora/api-datatype-core` 2.0 e valem para todos os datatypes 1.0.
 
-1. **O construtor nao e mais publico.** A criacao e so por `StorageKey::from(...)`. Antes (`0.x`), valia:
+1. **O construtor nao e mais publico.** A criacao e so por `new StorageKey(...)`. Antes (`0.x`), valia:
 
    ```php
    $chave = new StorageKey('documents/report.pdf'); // nao funciona mais: erro de visibilidade
-   $chave = StorageKey::from('documents/report.pdf'); // correto
+   $chave = new StorageKey('documents/report.pdf'); // correto
    ```
 
 2. **Entrada invalida lanca `InvalidArgumentException`** com a mensagem `Valor invalido para <classe>.`, onde
@@ -93,7 +93,7 @@ A regra de validacao e a normalizacao de `StorageKey` nao mudam.
 ## Dependencias de runtime
 
 - PHP 8.3 ou superior
-- `elavora/api-datatype-file-path` `^1.0` (que traz o `elavora/api-datatype-core` `^2.0`, e este, o
+- `elavora/api-datatype-file-path` `^2.0` (que traz o `elavora/api-datatype-core` `^3.0`, e este, o
   `elavora/api-framework` `^2.0`)
 
 ## Validacao no projeto consumidor
