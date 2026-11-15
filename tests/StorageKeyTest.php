@@ -87,8 +87,8 @@ final class StorageKeyTest extends TestCase
         self::assertTrue($class->isReadOnly());
     }
 
-    public function testConstructorIsNotPublic(): void
+    public function testConstructorIsPublic(): void
     {
-        self::assertFalse((new ReflectionClass(StorageKey::class))->isInstantiable());
+        self::assertTrue((new ReflectionClass(StorageKey::class))->isInstantiable());
     }
 }
