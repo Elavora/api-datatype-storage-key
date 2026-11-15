@@ -32,7 +32,7 @@ final class StorageKeyTest extends TestCase
     public function testValidKeysAreNormalized(string $input, string $expected): void
     {
         self::assertTrue(StorageKey::isValid($input));
-        self::assertSame($expected, new StorageKey($input)->value());
+        self::assertSame($expected, (new StorageKey($input))->value());
     }
 
     /**
