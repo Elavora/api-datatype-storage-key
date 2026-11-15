@@ -85,10 +85,10 @@ test.describe('composer.json', () => {
         assert.ok(!raw.split('\n').some((l) => /^ {4}"require"/.test(l)), 'indentação de 4 espaços encontrada');
     });
 
-    test('require tem php >=8.3 e elavora/api-datatype-file-path ^1.0, sem exigir o core direto', () => {
+    test('require tem php >=8.3 e elavora/api-datatype-file-path ^2.0, sem exigir o core direto', () => {
         const c = composer();
         assert.equal((c.require || {}).php, '>=8.3');
-        assert.equal((c.require || {})['elavora/api-datatype-file-path'], '^1.0', 'dependência de runtime deveria ser ^1.0');
+        assert.equal((c.require || {})['elavora/api-datatype-file-path'], '^2.0', 'dependência de runtime deveria ser ^2.0');
         assert.ok(!('elavora/api-datatype-core' in (c.require || {})), 'o core vem pelo file-path');
     });
 

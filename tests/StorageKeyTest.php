@@ -32,7 +32,7 @@ final class StorageKeyTest extends TestCase
     public function testValidKeysAreNormalized(string $input, string $expected): void
     {
         self::assertTrue(StorageKey::isValid($input));
-        self::assertSame($expected, StorageKey::from($input)->value());
+        self::assertSame($expected, (new StorageKey($input))->value());
     }
 
     /**
@@ -62,12 +62,12 @@ final class StorageKeyTest extends TestCase
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('Valor invalido para Elavora\\Api\\DataTypes\\Storage\\StorageKey.');
 
-        StorageKey::from($input);
+        new StorageKey($input);
     }
 
     public function testJsonSerializeAndStringCastReturnNormalizedValue(): void
     {
-        $key = StorageKey::from('documents\\report.pdf');
+        $key = new StorageKey('documents\\report.pdf');
 
         self::assertSame('documents/report.pdf', $key->jsonSerialize());
         self::assertSame('"documents\/report.pdf"', json_encode($key));
@@ -76,7 +76,7 @@ final class StorageKeyTest extends TestCase
 
     public function testExtendsFilePath(): void
     {
-        self::assertInstanceOf(FilePath::class, StorageKey::from('documents/report.pdf'));
+        self::assertInstanceOf(FilePath::class, new StorageKey('documents/report.pdf'));
     }
 
     public function testIsFinalReadonlyClass(): void
@@ -87,8 +87,8 @@ final class StorageKeyTest extends TestCase
         self::assertTrue($class->isReadOnly());
     }
 
-    public function testConstructorIsNotPublic(): void
+    public function testConstructorIsPublic(): void
     {
-        self::assertFalse((new ReflectionClass(StorageKey::class))->isInstantiable());
+        self::assertTrue((new ReflectionClass(StorageKey::class))->isInstantiable());
     }
 }
