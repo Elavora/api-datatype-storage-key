@@ -23,6 +23,17 @@ $chave = new StorageKey('documents\\report.pdf');
 $normalizado = $chave->value(); // "documents/report.pdf"
 ```
 
+## Documentacao do tipo (OPTIONS)
+
+`StorageKey` implementa `Elavora\Api\Framework\Contracts\DescribesType`. O OPTIONS publico da API usa
+`documentedType()` para documentar o campo sem expor o nome da classe PHP. O tipo declara:
+
+- `type`: `string`
+- `description`: chave relativa de arquivo, pastas separadas por `/`, sem barra inicial; `\` vira `/` em `value()`
+- `example`: `documents/report.pdf`
+
+Quem valida continua sendo `isValid()`.
+
 ## Principais pontos de entrada
 
 - `Elavora\Api\DataTypes\Storage\StorageKey`
