@@ -92,8 +92,8 @@ A regra de validacao e a normalizacao de `StorageKey` nao mudam.
 
 ## Dependencias de runtime
 
-- PHP 8.3 ou superior
-- `elavora/api-datatype-file-path` `^2.0` (que traz o `elavora/api-datatype-core` `^3.0`, e este, o
+- PHP 8.4 ou superior
+- `elavora/api-datatype-file-path` `^3.0` (que traz o `elavora/api-datatype-core` `^3.0`, e este, o
   `elavora/api-framework` `^2.0`)
 
 ## Validacao no projeto consumidor
